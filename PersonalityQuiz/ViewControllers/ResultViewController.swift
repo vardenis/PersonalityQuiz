@@ -41,17 +41,18 @@ extension ResultViewController {
         for answer in answersChosen {
             switch answer.animal {
             case .dog:
-                animalCount[.dog] = animalCount[.dog] ?? 0 + 1
+                animalCount.updateValue((animalCount[.dog] ?? 0) + 1, forKey: .dog)
             case .cat:
-                animalCount[.cat] = animalCount[.cat] ?? 0 + 1
+                animalCount.updateValue((animalCount[.cat] ?? 0) + 1, forKey: .cat)
             case .rabbit:
-                animalCount[.rabbit] = animalCount[.rabbit] ?? 0 + 1
+                animalCount.updateValue((animalCount[.rabbit] ?? 0) + 1, forKey: .rabbit)
             case .turtle:
-                animalCount[.turtle] =  animalCount[.turtle] ?? 0 + 1
+                animalCount.updateValue((animalCount[.turtle] ?? 0) + 1, forKey: .turtle)
             }
         }
         
         let maxAnimal = animalCount.max { a, b in a.value < b.value }
+        print (maxAnimal ?? " ")
         
         return(maxAnimal?.key.rawValue ?? " ", maxAnimal?.key.definition ?? " ")
     }
