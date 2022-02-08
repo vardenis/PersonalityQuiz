@@ -9,11 +9,6 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    // 1. Передать сюда массив с ответами
-    // 2. Определить наиболее часто встречающийся тип животного
-    // 3. Отобразить результат в соответствии с этим животным
-    // 4. Избавиться от кнопки возврата на предыдущий экран
-
     @IBOutlet var matchIconL: UILabel!
     @IBOutlet var descriptionL: UILabel!
     
@@ -26,6 +21,8 @@ class ResultViewController: UIViewController {
         
         matchIconL.text = "Вы \(resultAnimal.0)!"
         descriptionL.text = resultAnimal.1
+        
+        navigationItem.setHidesBackButton(true, animated: true)
     }
 }
 
