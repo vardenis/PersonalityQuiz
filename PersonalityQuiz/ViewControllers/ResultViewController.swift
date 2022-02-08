@@ -24,7 +24,7 @@ class ResultViewController: UIViewController {
          
         let resultAnimal = animalDefinition(answersChosen: answersChosen)
         
-        matchIconL.text = "Вы \(resultAnimal.0 ?? " ")!"
+        matchIconL.text = "Вы \(resultAnimal.0)!"
         descriptionL.text = resultAnimal.1
     }
 }
@@ -32,36 +32,30 @@ class ResultViewController: UIViewController {
 // MARK: - Private Methods
 
 extension ResultViewController {
-    private func animalDefinition(answersChosen: [Answer]) -> (Character?, String?){
-        var countDog = 0
-        var countCat = 0
-        var countRabbit = 0
-        var countTurtle = 0
+    private func animalDefinition(answersChosen: [Answer]) -> (Character, String){
         var animalCount = [Animal: Int]()
+        animalCount = [
+            .dog : 0,
+            .cat : 0,
+            .rabbit : 0,
+            .turtle : 0
+        ]
         
         for answer in answersChosen {
             switch answer.animal {
             case .dog:
-                countDog += 1
+                animalCount[.dog] = animalCount[.dog] ?? 0 + 1
             case .cat:
-                countCat += 1
+                animalCount[.cat] = animalCount[.cat] ?? 0 + 1
             case .rabbit:
-                countRabbit += 1
+                animalCount[.rabbit] = animalCount[.rabbit] ?? 0 + 1
             case .turtle:
-                countTurtle += 1
+                animalCount[.turtle] =  animalCount[.turtle] ?? 0 + 1
             }
         }
         
-        animalCount = [
-            .dog : countDog,
-            .cat : countCat,
-            .rabbit : countRabbit,
-            .turtle : countTurtle
-        ]
-        
         let maxAnimal = animalCount.max { a, b in a.value < b.value }
-
         
-        return(maxAnimal?.key.rawValue, maxAnimal?.key.definition)
+        return(maxAnimal?.key.rawValue ?? " ", maxAnimal?.key.definition ?? " ")
     }
 }
